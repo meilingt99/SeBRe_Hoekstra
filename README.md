@@ -10,21 +10,25 @@ Usage:
 
 1. Clone this directory.
 
-2. Copy your training, testing, and image and mask folders into SeBRe_Hoekstra/myDATASET (your images and masks should be in different folders). Your mask folder should have folders inside, one folder for each corresponding image called `masked_section_<image number>`, with the mask for the class (i.e. part of the brain) you're training the model to identify in that folder (e.g. for image 17, there will be a folder called masked_section_17 containing a file masked_section_17.png). If you need help getting images in this folder, I have code for this I'll be updating the directory with soon! 
+2. Navigate to this directory and make empty log, myDATASET, and SeBRe.logs directories from the command line using `mkdir` (e.g. `mkdir logs`).
 
-3. To generate binary masks from mask images: `sbatch custom_dataset_create.py --in_folder <mask image input directory name in myDATASET> --out_folder <mask output directory in myDATASET>`
+3. Copy over the SeBRe_env virtual environment which is needed to run SeBRe since the FASRC cluster does not have all the necessary dependencies. If you have read permissions on eddyfs01, you can copy it over using `cp -r /n/eddyfs01/mthompson/SeBRe_Hoekstra/SeBRe_env <destination>/SeBRe_Hoekstra`.
+
+4. Copy your training, testing, and image and mask folders into SeBRe_Hoekstra/myDATASET (your images and masks should be in different folders). Your mask folder should have folders inside, one folder for each corresponding image called `masked_section_<image number>`, with the mask for the class (i.e. part of the brain) you're training the model to identify in that folder (e.g. for image 17, there will be a folder called masked_section_17 containing a file masked_section_17.png). If you need help getting images in this folder, I have code for this I'll be updating the directory with soon! 
+
+5. Generate binary masks from mask images: `sbatch custom_dataset_create.py --in_folder <mask image input directory name in myDATASET> --out_folder <mask output directory in myDATASET>`
 
    **Note**: output directory should not already exist.
    Example usage: `sbatch custom_dataset_create.sbatch --in_folder example_custom_dataset_create_input --out_folder example_custom_dataset_create_output `
 
-4. Train a model using your training dataset (with testing at the end and validation at the end of each epoch). **Before** submitting this job, 
+6. Train a model using your training dataset (with testing at the end and validation at the end of each epoch). **Before** submitting this job, 
 
    1. Modify the necessary hyperparameters (see "Guide to Hyperparameters") 
    2. Change training, validation, and testing image and mask paths in the SeBRe_training.py file **directly**. These paths are at the top of the SeBRe_training.py file, right under the imports (line 37).
    3. Usage:`sbatch SeBRe_training.sbatch --epochs <epoch number> --output_dir <output directory name>`
       Example: `sbatch SeBRe_training.sbatch --epochs 10 --output_dir example_SeBRe_run_10_epochs`
 
-5. To conduct inference on novel images using a previously trained model ("test"), modify the testing image path in the SeBRe_testing.sbatch file and then enter this on the command line: `sbatch SeBRe_testing.sbatch --model_dir <model directory> --output_dir <output directory name>`
+7. To conduct inference on novel images using a previously trained model ("test"), modify the testing image path in the SeBRe_testing.sbatch file and then enter this on the command line: `sbatch SeBRe_testing.sbatch --model_dir <model directory> --output_dir <output directory name>`
 
    1. Model directory should be the SeBRe_training.py output directory in SeBRe_Hoekstra/logs/ that contains the trained model e.g. from the example above `example_SeBRe_run_10_epochs`
 
