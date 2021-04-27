@@ -16,7 +16,7 @@ Usage:
 
 4. Copy your training, testing, and image and mask folders into SeBRe_Hoekstra/myDATASET (your images and masks should be in different folders). Your mask folder should have folders inside, one folder for each corresponding image called `masked_section_<image number>`, with the mask for the class (i.e. part of the brain) you're training the model to identify in that folder (e.g. for image 17, there will be a folder called masked_section_17 containing a file masked_section_17.png). If you need help getting images in this folder, I have code for this I'll be updating the directory with soon! 
 
-5. Generate binary masks from mask images: `sbatch custom_dataset_create.py --in_folder <mask image input directory name in myDATASET> --out_folder <mask output directory in myDATASET>`
+5. Generate binary masks from mask images: `sbatch custom_dataset_create.sbatch --in_folder <mask image input directory name in myDATASET> --out_folder <mask output directory in myDATASET>`
 
    **Note**: output directory should not already exist.
    Example usage: `sbatch custom_dataset_create.sbatch --in_folder example_custom_dataset_create_input --out_folder example_custom_dataset_create_output `
