@@ -1,7 +1,7 @@
- #!/bin/bash
+#!/bin/bash
 
 ## change this job name to reflect your job
-#SBATCH -J image processing
+#SBATCH -J translations
 
 #SBATCH -n 1
 #SBATCH -N 1
@@ -9,7 +9,7 @@
 #SBATCH -p shared
 #SBATCH --mem 16gb
 
-## SeBRe.logs/ is the output and error directory
+## SeBRe.logs/ is a directory I made before running this sbatch file
 #SBATCH -e SeBRe.logs/%A.err
 #SBATCH -o SeBRe.logs/%A.out
 
@@ -51,7 +51,7 @@ cd $HOME_DIR
 
 source SeBRe_env/bin/activate
 
-python cropped_custom_dataset_create.py $MASK_INT $3
+python custom_dataset_create.py $MASK_INT $3
 
 rm -r $DEST_DIR/$1
 rm -r $DEST_DIR/$MASK_INT

@@ -4,8 +4,8 @@ import sys
 import numpy as np
 
 import glob #for selecting png files in training images folder
-in_folder = sys.argv[1]
-out_folder = sys.argv[2]
+in_folder = os.getcwd() + "/preprocessed_datasets/" + sys.argv[1]
+out_folder = os.getcwd() + "/preprocessed_datasets/" + sys.argv[2]
 pixels = int(sys.argv[3])
 
 if not os.path.exists(out_folder):
