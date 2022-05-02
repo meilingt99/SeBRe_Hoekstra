@@ -8,6 +8,7 @@ import os
 import math
 import random
 import numpy as np
+import collections.abc
 from collections.abc import MutableMapping
 import tensorflow as tf
 import scipy.misc
