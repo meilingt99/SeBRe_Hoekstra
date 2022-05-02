@@ -21,7 +21,7 @@ Usage: `sbatch translate_images.sbatch [Input Directory] [Output Directory] [# o
   **Note**: output directory should not already exist.
 
 4. After you have completed image processing or if no image processing is desired, simply return to the home directory and execute the following command to process the images: 
-`sbatch process_images.sbatch [Input directory name in preprocessed_datasets directory] [Desired images directory name for myDATASET] [Desired masks directory name for myDATASET]`
+`sbatch image_processing_pipeline.sbatch [Input directory name in preprocessed_datasets directory] [Desired images directory name for myDATASET] [Desired masks directory name for myDATASET]`
 
    **Note**: output directory should not already exist.
 
